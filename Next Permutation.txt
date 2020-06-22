@@ -1,0 +1,39 @@
+  if(nums.length < 2) return;
+        
+        int startIdx = nums.length - 2;
+        
+        //decrease startIdx until we find a number strictly less than its neighbor
+
+        while(startIdx >= 0 && nums[startIdx] >= nums[starttIdx + 1]) startIdx--;
+        
+        //if we didn't find a value, we know that our permutation is already in decreasing order
+        //which means that we have hit the last permutation
+
+        if(startIdx == - 1){
+            reverse(nums ,0, nums.length - 1);
+            return;
+        }
+        //swap the startValue with the smallest element to the right of it.
+        //This will be the first element we see while traversing from right to left.
+
+        for(int i = nums.length - 1; i > startIdx; i--){
+            if(nums[i] > nums[startIdx]){
+                swap(nums, startIdx, i);
+                break;
+            }
+        }
+        //reverse all elements to the right of start
+
+        reverse(nums, startIdx + 1, nums.length - 1);
+        
+    }
+    public void reverse(int[] array, int i, int j){
+        while(i < j){
+            swap(array, i++, j--);
+        }
+    }
+    
+    public void swap(int[] array, int i, int j){
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;

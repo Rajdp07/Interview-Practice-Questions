@@ -1,0 +1,19 @@
+class Solution {
+       public int uniquePaths(int m, int n) {//in this question m is considered as columns and n as rows(usually we take first element written as rows but it is reversed here )
+        int[][] matrix = new int[n][m]; // create a matrix in which value of every element represents the total possible ways to reach there.
+       
+        for (int i = 0; i < m; i++) {
+            matrix[0][i] = 1;//as there is only one way to reach every element having index (0,i).i.e->(0,1)->(0,2)->(0,3)->--so on till (0,m) and it is by moving right from (0,0)
+
+        }
+        for (int i = 0; i < n; i++) {
+            matrix[i][0] = 1;// as there is only one way to reach every index (i,0) by going down(1,0) and down(2,0) and down(3,0)...
+        }
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < m; j++) {
+                matrix[i][j] = matrix[i - 1][j] + matrix[i][j - 1]; //for every other element number of ways to reach there is sum of number of ways to reach its top and number of ways to reach to its left(since we can move only right and down)
+            }
+        }
+        return matrix[n - 1][m - 1];  //finally return the number of ways to reach last element.
+    }
+}
